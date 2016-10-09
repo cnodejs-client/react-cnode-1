@@ -1,30 +1,22 @@
-
-import React, { Component } from 'react';
+import React from 'react';
 import { render } from 'react-dom';
-import { store, INCREMENT, DECREMENT } from './components/App.js';
+import { Router, browserHistory,  } from 'react-router';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import { MuiThemeProvider } from 'material-ui';
 
-class Root extends Component {
-  render() {
-    return (
-      <div>
-        <div>add {store.getState()}</div>
-        <button onClick={() => store.dispatch(INCREMENT)}>+</button>
-        <button onClick={() => store.dispatch(DECREMENT)}>-</button>
-      </div>
-    );
-  }
-}
+import routes from './routes.js';
+import './styles/normalize.css';
+import './styles/app.less';
 
-const rootElement = document.getElementById('root');
+injectTapEventPlugin();
 
+const RouterTree = () => (
+  <MuiThemeProvider>
+    <Router history={browserHistory} routes={routes} />
+  </MuiThemeProvider>
+);
 
-function renderCom() {
-  render(
-    <Root />,
-    rootElement
-  );
-}
-
-renderCom();
-
-store.subscribe(renderCom);
+render(
+  <RouterTree />,
+  document.querySelector('#root')
+);

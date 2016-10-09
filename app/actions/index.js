@@ -1,30 +1,26 @@
-export const ADDTO = 'ADDTO';
-export const COMPLETEDTODO = 'COMPLETEDTODO';
-export const FILTERS = 'FILTERS';
+import * as types from '../constants/ActionTypes.js';
+import 'whatwg-fetch';
 
-export const STATUS = {
-  completed: Symbol(),
-  active: Symbol(),
-  all: Symbol()
-};
-
-export function addTo(text) {
+export function requestPost(content) {
   return {
-    type: ADDTO,
-    text
+    type: types.REQUEST_POST,
+    content
   };
 }
 
-export function completedTodo(index) {
+export function receivePost(content, json) {
   return {
-    type: COMPLETEDTODO,
-    index
+    type: types.RECEIVE_POST,
+    content,
+    posts: json
   };
 }
 
-export function filterTodo(filter) {
-  return {
-    type: FILTERS,
-    filter
+export function fetchPost(url, content) {
+  return dispatch => {
+    dispatch(requestPost(content));
+    return fetch(url)
+      .then(res => res.json())
+      .then(json => dispatch(receivePost(content, json)));
   };
 }
