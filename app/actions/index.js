@@ -16,10 +16,10 @@ export function receivePost(content, json) {
   };
 }
 
-export function fetchPost(url, content) {
+export function fetchPost(url, query, content) {
   return dispatch => {
     dispatch(requestPost(content));
-    return fetch(url)
+    return fetch(`https://cnodejs.org/api/v1/${url}?${query}`)
       .then(res => res.json())
       .then(json => dispatch(receivePost(content, json)));
   };
