@@ -29,19 +29,21 @@ class Detail extends Component {
           <CardHeader
             title={topicDetail.author.loginname}
             subtitle={'发布于' + topicDetail.create_at}
-            avatar={ <Link to={'/user/' + topicDetail.author.loginname }><Avatar src={ topicDetail.author.avatar_url } /></Link> }
+            avatar={
+              <Link to={'/user/' + topicDetail.author.loginname}><Avatar src={topicDetail.author.avatar_url} /></Link>
+            }
           />
-          <CardTitle title={ topicDetail.title } />
-          <CardText dangerouslySetInnerHTML={{ __html: topicDetail.archive }}/>
+          <CardTitle title={topicDetail.title}/>
+          <CardText dangerouslySetInnerHTML={{__html: topicDetail.archive}}/>
           <CardHeader
             title="评论"
           />
           {
             topicDetail.replies.map((val, index) =>
-              <List key={ index }>
+              <List key={index}>
                 <ListItem
-                  leftAvatar={ <Link to={'/user/' + val.author.loginname }><Avatar title={ val.author.loginname } src={ val.author.avatar_url } /></Link> }
-                  primaryText={ <div dangerouslySetInnerHTML={{__html: val.content }} /> }
+                  leftAvatar={<Link to={'/user/' + val.author.loginname}><Avatar title={val.author.loginname} src={val.author.avatar_url} /></Link>}
+                  primaryText={<div dangerouslySetInnerHTML={{__html: val.content }}/>}
                 />
                 <Divider inset/>
               </List>
