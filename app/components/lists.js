@@ -5,16 +5,18 @@ import { List, ListItem, Avatar, Divider, FlatButton, CircularProgress } from 'm
 
 class Lists extends Component {
   static propTypes = {
-    items: PropTypes.array.isRequired
+    items: PropTypes.array.isRequired,
+    onClick: PropTypes.func.isRequired
   }
 
   constructor(props) {
     super(props);
   }
 
-  componentDidMount() {}
-
-  handleTouch() {}
+  handleClick() {
+    const { onClick } = this.props;
+    onClick();
+  }
 
   render() {
     return (
@@ -46,7 +48,7 @@ class Lists extends Component {
                 color="rgb(0, 188, 212)"
               />
           }
-          onClick={() => this.handleTouch()}
+          onClick={() => this.handleClick()}
           style={{
             width: '100%',
             color: '#333'

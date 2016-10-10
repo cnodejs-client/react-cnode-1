@@ -1,13 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import Bar from '../components/bar.js';
 import Lists from '../components/lists.js';
-import { fetchPost } from '../actions/index.js';
+import { fetchList } from '../actions/index.js';
 
 class Home extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
-    topics: PropTypes.array.isRequired
+    topics: PropTypes.array.isRequired,
+    page: PropTypes.number.isRequired
   }
 
   constructor(props) {
@@ -16,25 +16,36 @@ class Home extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(fetchPost('topics', 'page=1'));
+    dispatch(fetchList('topics', 1));
   }
 
   render() {
-    const { topics } = this.props;
+    const { topics, page, dispatch } = this.props;
     return (
       <div>
-        <Bar />
         <Lists
           items={topics}
+          onClick={() => dispatch(fetchList('topics', page))}
         />
       </div>
     );
   }
 }
 
+function opeatorArray(array) {
+  const arr = [];
+  array.map(val => {
+    val.map(v => {
+      arr.push(v);
+    });
+  });
+  return arr;
+}
+
 function select(state) {
   return {
-    topics: state.topics.data
+    topics: opeatorArray(state.topics.page),
+    page: state.topics.numbers
   };
 }
 

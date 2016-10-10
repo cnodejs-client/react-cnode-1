@@ -1,7 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { AppBar, FlatButton, IconButton } from 'material-ui';
+import { Link } from 'react-router';
 
 export default class Bar extends Component {
+  static propTypes = {
+    children: PropTypes.object.isRequired
+  }
+
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
       <div>
@@ -10,15 +19,16 @@ export default class Bar extends Component {
           iconElementLeft={ <IconButton>{''}</IconButton>}
           iconElementRight={
             <div className="menu">
-              <FlatButton label="首页" />
-              <FlatButton label="新手入门" />
-              <FlatButton label="API" />
-              <FlatButton label="关于" />
-              <FlatButton label="注册" />
-              <FlatButton label="登录" />
+              <Link to="/"><FlatButton label="首页" /></Link>
+              <Link><FlatButton label="新手入门" /></Link>
+              <Link><FlatButton label="API" /></Link>
+              <Link><FlatButton label="关于" /></Link>
+              <Link><FlatButton label="注册" /></Link>
+              <Link><FlatButton label="登录" /></Link>
             </div>
           }
         />
+        <div className="wrap">{this.props.children}</div>
       </div>
     );
   }
