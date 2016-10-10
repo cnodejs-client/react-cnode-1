@@ -80,11 +80,11 @@ textarea,
 select,
 optgroup,
 option {
-    font-family: inherit;
+    /*font-family: inherit;
     font-size: inherit;
     font-style: inherit;
     font-weight: inherit;
-    outline: 0;
+    outline: 0;*/
 }
 
 button {

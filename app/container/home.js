@@ -6,7 +6,8 @@ import { fetchPost } from '../actions/index.js';
 
 class Home extends Component {
   static propTypes = {
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
+    topics: PropTypes.array.isRequired
   }
 
   constructor(props) {
@@ -19,17 +20,22 @@ class Home extends Component {
   }
 
   render() {
+    const { topics } = this.props;
     return (
       <div>
         <Bar />
-        <Lists />
+        <Lists
+          items={topics}
+        />
       </div>
     );
   }
 }
 
-// function select(state) {
-//   return state;
-// }
+function select(state) {
+  return {
+    topics: state.topics.data
+  };
+}
 
-export default connect()(Home);
+export default connect(select)(Home);
