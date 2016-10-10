@@ -1,26 +1,24 @@
 import * as types from '../constants/ActionTypes.js';
 import 'whatwg-fetch';
 
-export function requestPost(content) {
+export function requestPost() {
   return {
-    type: types.REQUEST_POST,
-    content
+    type: types.REQUEST_POST
   };
 }
 
-export function receivePost(content, json) {
+export function receivePost(json) {
   return {
     type: types.RECEIVE_POST,
-    content,
-    posts: json
+    data: json.data
   };
 }
 
-export function fetchPost(url, query, content) {
+export function fetchPost(url, query) {
   return dispatch => {
-    dispatch(requestPost(content));
+    dispatch(requestPost());
     return fetch(`https://cnodejs.org/api/v1/${url}?${query}`)
       .then(res => res.json())
-      .then(json => dispatch(receivePost(content, json)));
+      .then(json => dispatch(receivePost(json)));
   };
 }

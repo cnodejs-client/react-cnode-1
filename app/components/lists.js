@@ -1,56 +1,56 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
-import { List, ListItem, Avatar, Subheader, Divider, FlatButton, CircularProgress } from 'material-ui';
-import { filter } from '../filter.js';
+// import { Link } from 'react-router';
+// import { List, ListItem, Avatar, Subheader, Divider, FlatButton, CircularProgress } from 'material-ui';
+// import { filter } from '../filter.js';
 
 class Lists extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      page: 1,
-      lists: [],
-      btnName: '点击加载',
-      show: false
-    };
+    // this.state = {
+    //   page: 1,
+    //   lists: [],
+    //   btnName: '点击加载',
+    //   show: false
+    // };
   }
 
   componentDidMount() {
-    fetch('https://cnodejs.org/api/v1/topics?page=' + this.state.page, {
-        method: 'GET'
-    }).then(res => res.json()).then(data => {
-        this.setState({
-          lists: data.data,
-          page: this.state.page + 1
-        });
-    });
+    // fetch('https://cnodejs.org/api/v1/topics?page=' + this.state.page, {
+    //     method: 'GET'
+    // }).then(res => res.json()).then(data => {
+    //     this.setState({
+    //       lists: data.data,
+    //       page: this.state.page + 1
+    //     });
+    // });
   }
 
   handleTouch() {
-    this.setState({
-      btnName: '正在加载...',
-      show: true
-    });
-    fetch('https://cnodejs.org/api/v1/topics?page=' + this.state.page, {
-        method: 'GET'
-    }).then(res => res.json()).then(data => {
-        this.setState({
-          lists: this.state.lists.concat(data.data),
-          page: this.state.page + 1,
-          btnName: '点击加载',
-          show: false
-        });
-    }).catch(() => {
-      this.setState({
-        btnName: '加载失败',
-        show: false
-      });
-    });
+    // this.setState({
+    //   btnName: '正在加载...',
+    //   show: true
+    // });
+    // fetch('https://cnodejs.org/api/v1/topics?page=' + this.state.page, {
+    //     method: 'GET'
+    // }).then(res => res.json()).then(data => {
+    //     this.setState({
+    //       lists: this.state.lists.concat(data.data),
+    //       page: this.state.page + 1,
+    //       btnName: '点击加载',
+    //       show: false
+    //     });
+    // }).catch(() => {
+    //   this.setState({
+    //     btnName: '加载失败',
+    //     show: false
+    //   });
+    // });
   }
 
   render() {
     return (
       <div className="wrap">
-        <Subheader>全部</Subheader>
+        {/* <Subheader>全部</Subheader>
         {
           this.state.lists.map((val, index) =>
             <Link to={'/topic/' + val.id } key={ index }>
@@ -82,7 +82,7 @@ class Lists extends Component {
           style={{
             width: '100%',
             color: '#333'
-          }}/>
+          }}/> */}
       </div>
     );
   }
