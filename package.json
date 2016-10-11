@@ -28,6 +28,7 @@
     "babel-cli": "^6.4.0",
     "draft-js": "^0.9.1",
     "material-ui": "^0.15.1",
+    "moment": "^2.15.1",
     "normalize.css": "^5.0.0",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",

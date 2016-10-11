@@ -1,13 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Lists from '../components/lists.js';
-import { fetchList } from '../actions/index.js';
+import { fetchList, fetchMoreList } from '../actions/index.js';
 
 class Home extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     topics: PropTypes.array.isRequired,
-    page: PropTypes.number.isRequired
+    page: PropTypes.number.isRequired,
+    btn: PropTypes.object.isRequired
   }
 
   constructor(props) {
@@ -15,17 +16,18 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(fetchList('topics', 1));
+    const { dispatch, page } = this.props;
+    dispatch(fetchList('topics', page));
   }
 
   render() {
-    const { topics, page, dispatch } = this.props;
+    const { topics, page, dispatch, btn } = this.props;
     return (
       <div>
         <Lists
           items={topics}
-          onClick={() => dispatch(fetchList('topics', page))}
+          btn={btn}
+          onClick={() => dispatch(fetchMoreList('topics', page))}
         />
       </div>
     );
@@ -45,7 +47,8 @@ function opeatorArray(array) {
 function select(state) {
   return {
     topics: opeatorArray(state.topics.page),
-    page: state.topics.numbers
+    page: state.topics.numbers,
+    btn: state.topics.btn
   };
 }
 

@@ -1,6 +1,23 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Editor, EditorState, RichUtils } from 'draft-js';
 import './richeditor.less';
+
+// Custom overrides for "code" style.
+const styleMap = {
+  CODE: {
+    backgroundColor: 'rgba(0, 0, 0, 0.05)',
+    fontFamily: '"Inconsolata", "Menlo", "Consolas", monospace',
+    fontSize: 16,
+    padding: 2
+  }
+};
+
+function getBlockStyle(block) {
+  switch (block.getType()) {
+    case 'blockquote': return 'RichEditor-blockquote';
+    default: return null;
+  }
+}
 
 class RichEditor extends Component {
   constructor(props) {
@@ -78,7 +95,7 @@ class RichEditor extends Component {
             onChange={this.onChange}
             placeholder="Tell a story..."
             ref="editor"
-            spellCheck={true}
+            spellCheck
           />
         </div>
       </div>
@@ -86,24 +103,13 @@ class RichEditor extends Component {
   }
 }
 
-// Custom overrides for "code" style.
-const styleMap = {
-  CODE: {
-    backgroundColor: 'rgba(0, 0, 0, 0.05)',
-    fontFamily: '"Inconsolata", "Menlo", "Consolas", monospace',
-    fontSize: 16,
-    padding: 2
-  }
-};
-
-function getBlockStyle(block) {
-  switch (block.getType()) {
-    case 'blockquote': return 'RichEditor-blockquote';
-    default: return null;
-  }
-}
-
 class StyleButton extends Component {
+  static propTypes = {
+    onToggle: PropTypes.func.isRequired,
+    style: PropTypes.object.isRequired,
+    active: PropTypes.bool.isRequired,
+    label: PropTypes.string.isRequired
+  }
   constructor() {
     super();
     this.onToggle = (e) => {
@@ -159,7 +165,12 @@ const BlockStyleControls = (props) => {
         />
       )}
     </div>
-  )
+  );
+};
+
+BlockStyleControls.propTypes = {
+  editorState: PropTypes.object.isRequired,
+  onToggle: PropTypes.func.isRequired
 };
 
 const INLINE_STYLES = [
@@ -183,7 +194,12 @@ const InlineStyleControls = (props) => {
         />
       )}
     </div>
-  )
+  );
+};
+
+InlineStyleControls.propTypes = BlockStyleControls.propTypes = {
+  editorState: PropTypes.object.isRequired,
+  onToggle: PropTypes.func.isRequired
 };
 
 export default RichEditor;

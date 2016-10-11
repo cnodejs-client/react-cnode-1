@@ -6,7 +6,8 @@ import { List, ListItem, Avatar, Divider, FlatButton, CircularProgress } from 'm
 class Lists extends Component {
   static propTypes = {
     items: PropTypes.array.isRequired,
-    onClick: PropTypes.func.isRequired
+    onClick: PropTypes.func.isRequired,
+    btn: PropTypes.object.isRequired
   }
 
   constructor(props) {
@@ -19,10 +20,11 @@ class Lists extends Component {
   }
 
   render() {
+    const { items, btn } = this.props;
     return (
       <div className="wrap">
         {
-          this.props.items.map((v, i) =>
+          items.map((v, i) =>
             <Link to={'/topic/' + v.id } key={i}>
               <List>
                 <ListItem
@@ -37,13 +39,13 @@ class Lists extends Component {
           )
         }
         <FlatButton
-          label={"点击加载"}
+          label={btn.text}
           icon={
               <CircularProgress
-                // innerStyle={{
-                //   visibility: this.state.show ? 'visible' : 'hidden'
-                // }}
-                className="circular_progress"
+                innerStyle={{
+                  visibility: btn.show
+                }}
+                className="circularProgress"
                 size={0.3}
                 color="rgb(0, 188, 212)"
               />
