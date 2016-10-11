@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Editor, EditorState, RichUtils } from 'draft-js';
+import { FlatButton } from 'material-ui';
 import './richeditor.less';
 
 // Custom overrides for "code" style.
@@ -20,6 +21,10 @@ function getBlockStyle(block) {
 }
 
 class RichEditor extends Component {
+  static propTypes = {
+    onHandleClick: PropTypes.func.isRequired
+  }
+
   constructor(props) {
     super(props);
 
@@ -65,6 +70,7 @@ class RichEditor extends Component {
 
   render() {
     const {editorState} = this.state;
+    const { onHandleClick } = this.props;
 
     // If the user changes block type before entering any text, we can
     // either style the placeholder or hide it. Let's just hide it now.
@@ -98,6 +104,15 @@ class RichEditor extends Component {
             spellCheck
           />
         </div>
+        <FlatButton
+          label="回复"
+          backgroundColor="rgba(0, 188, 212, 1)"
+          hoverColor="rgba(0, 188, 212, 0.5)"
+          style={{
+            color: '#fff'
+          }}
+          onClick={() => onHandleClick(contentState)}
+        />
       </div>
     );
   }
@@ -106,7 +121,7 @@ class RichEditor extends Component {
 class StyleButton extends Component {
   static propTypes = {
     onToggle: PropTypes.func.isRequired,
-    style: PropTypes.object.isRequired,
+    style: PropTypes.string.isRequired,
     active: PropTypes.bool.isRequired,
     label: PropTypes.string.isRequired
   }

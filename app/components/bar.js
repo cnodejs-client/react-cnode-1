@@ -11,12 +11,17 @@ export default class Bar extends Component {
     super(props);
   }
 
+  _handleClick(e) {
+     e.preventDefault();
+     window.console.log('here');
+  }
+
   render() {
     return (
       <div>
         <AppBar
           title={<img className="webstiteTitle" src="//o4j806krb.qnssl.com/public/images/cnodejs_light.svg" />}
-          iconElementLeft={ <IconButton>{''}</IconButton>}
+          iconElementLeft={<IconButton />}
           iconElementRight={
             <div className="menu">
               <Link to="/"><FlatButton label="首页" /></Link>

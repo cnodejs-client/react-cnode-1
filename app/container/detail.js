@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { fetchDetail } from '../actions/index.js';
 import { Link } from 'react-router';
 import { Card, CardHeader, CardTitle, CardText, List, ListItem, Avatar, Divider } from 'material-ui';
+import { fetchDetail } from '../actions/index.js';
+import { getRichEditorState } from '../actions/richeditorAction.js';
 import RichEditor from '../components/richeditor/index.js';
 
 class Detail extends Component {
@@ -26,7 +27,7 @@ class Detail extends Component {
   }
 
   render() {
-    const { author, createAt, title, content, replies } = this.props;
+    const { author, createAt, title, content, replies, dispatch } = this.props;
     return(
       <div className="detail">
         <Card className="card">
@@ -57,7 +58,9 @@ class Detail extends Component {
           }
         </Card>
         <Card className="card richeditor">
-          <RichEditor />
+          <RichEditor
+            onHandleClick={(state) => dispatch(getRichEditorState(state))}
+          />
         </Card>
       </div>
     );

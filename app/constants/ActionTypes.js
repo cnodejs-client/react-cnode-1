@@ -15,3 +15,6 @@ export const DETAIL_FETCH_POST = 'DETAIL_FETCH_POST';
 export const USER_REQUEST_POST = 'USER_REQUEST_POST';
 export const USER_RECEIVE_POST = 'USER_RECEIVE_POST';
 export const USER_FETCH_POST = 'USER_FETCH_POST';
+
+//richeditor
+export const RICH_EDITOR_STATE = 'RICH_EDITOR_STATE';

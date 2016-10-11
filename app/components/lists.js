@@ -29,7 +29,6 @@ class Lists extends Component {
               <List>
                 <ListItem
                   leftAvatar={<Avatar src={ v.author.avatar_url } />}
-                  // rightIcon={ v.tab ?<div className="list_icon">{ filter(v.tab) }</div> :<div></div> }
                   primaryText={v.title}
                   secondaryText={v.author.loginname +' '+ v.reply_count+'/'+v.visit_count}
                 />
@@ -42,11 +41,9 @@ class Lists extends Component {
           label={btn.text}
           icon={
               <CircularProgress
-                innerStyle={{
-                  visibility: btn.show
-                }}
+                innerStyle={{visibility: btn.show}}
                 className="circularProgress"
-                size={0.3}
+                size={17.85}
                 color="rgb(0, 188, 212)"
               />
           }
@@ -54,7 +51,8 @@ class Lists extends Component {
           style={{
             width: '100%',
             color: '#333'
-          }}/>
+          }}
+        />
       </div>
     );
   }

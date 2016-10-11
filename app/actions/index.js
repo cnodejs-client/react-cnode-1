@@ -38,7 +38,8 @@ export function fetchMoreList(url, query) {
     dispatch(requestList());
     return fetch(`https://cnodejs.org/api/v1/${url}?page=${query}`)
       .then(res => res.json())
-      .then(json => dispatch(receiveMoreList(json, query)));
+      .then(json => dispatch(receiveMoreList(json, query)))
+      .catch(err => window.console.log(err));
   };
 }
 
@@ -62,7 +63,8 @@ export function fetchDetail(url, query) {
     dispatch(requestDetail());
     return fetch(`https://cnodejs.org/api/v1/${url}/${query}`)
       .then(res => res.json())
-      .then(json => dispatch(receiveDetail(json, query)));
+      .then(json => dispatch(receiveDetail(json, query)))
+      .catch(err => window.console.log(err));
   };
 }
 
@@ -86,6 +88,7 @@ export function fetchUser(url, query) {
     dispatch(requestUser());
     return fetch(`https://cnodejs.org/api/v1/${url}/${query}`)
       .then(res => res.json())
-      .then(json => dispatch(receiveUser(json, query)));
+      .then(json => dispatch(receiveUser(json, query)))
+      .catch(err => window.console.log(err));
   };
 }
