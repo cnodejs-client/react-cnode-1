@@ -23,7 +23,7 @@ class Home extends Component {
   render() {
     const { topics, page, dispatch, btn } = this.props;
     return (
-      <div>
+      <div className="home">
         <Lists
           items={topics}
           btn={btn}

@@ -9,7 +9,11 @@ class Detail extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     params: PropTypes.object.isRequired,
-    topicDetail: PropTypes.object.isRequired
+    author: PropTypes.object.isRequired,
+    createAt: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    replies: PropTypes.array.isRequired
   }
 
   constructor(props) {
@@ -22,24 +26,24 @@ class Detail extends Component {
   }
 
   render() {
-    const { topicDetail } = this.props;
+    const { author, createAt, title, content, replies } = this.props;
     return(
       <div className="detail">
         <Card className="card">
           <CardHeader
-            title={topicDetail.author.loginname}
-            subtitle={'发布于' + topicDetail.create_at}
+            title={author.loginname}
+            subtitle={'发布于' + createAt}
             avatar={
-              <Link to={'/user/' + topicDetail.author.loginname}>
-                <Avatar src={topicDetail.author.avatar_url} />
+              <Link to={'/user/' + author.loginname}>
+                <Avatar src={author.avatarUrl} />
               </Link>
             }
           />
-          <CardTitle title={topicDetail.title}/>
-          <CardText dangerouslySetInnerHTML={{__html: topicDetail.content}}/>
+          <CardTitle title={title}/>
+          <CardText dangerouslySetInnerHTML={{__html: content}}/>
           <CardHeader title="评论"/>
           {
-            topicDetail.replies.map((val, index) =>
+            replies.map((val, index) =>
               <List key={index}>
                 <ListItem
                   leftAvatar={<Link to={'/user/' + val.author.loginname}>
@@ -52,7 +56,7 @@ class Detail extends Component {
             )
           }
         </Card>
-        <Card className="card">
+        <Card className="card richeditor">
           <RichEditor />
         </Card>
       </div>
@@ -62,7 +66,14 @@ class Detail extends Component {
 
 function select(state) {
   return {
-    topicDetail: state.topicDetail
+    author: state.topicDetail.author || {
+      loginname: '',
+      avatarUrl: ''
+    },
+    createAt: state.topicDetail.create_at || '',
+    title: state.topicDetail.title || '',
+    content: state.topicDetail.content || '',
+    replies: state.topicDetail.replies || []
   };
 }
 
