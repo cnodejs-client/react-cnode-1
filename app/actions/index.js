@@ -21,7 +21,8 @@ export function fetchList(url, query) {
     dispatch(requestList());
     return fetch(`https://cnodejs.org/api/v1/${url}?page=${query}`)
       .then(res => res.json())
-      .then(json => dispatch(receiveList(json, query)));
+      .then(json => dispatch(receiveList(json, query)))
+      .catch(err => window.console.log(err));
   };
 }
 

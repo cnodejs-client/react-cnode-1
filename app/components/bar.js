@@ -29,7 +29,7 @@ export default class Bar extends Component {
               <Link><FlatButton label="API" /></Link>
               <Link><FlatButton label="关于" /></Link>
               <Link><FlatButton label="注册" /></Link>
-              <Link><FlatButton label="登录" /></Link>
+              <Link to="/login"><FlatButton label="登录" /></Link>
             </div>
           }
         />

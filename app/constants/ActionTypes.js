@@ -16,5 +16,10 @@ export const USER_REQUEST_POST = 'USER_REQUEST_POST';
 export const USER_RECEIVE_POST = 'USER_RECEIVE_POST';
 export const USER_FETCH_POST = 'USER_FETCH_POST';
 
-//richeditor
+// richeditor
 export const RICH_EDITOR_STATE = 'RICH_EDITOR_STATE';
+
+
+// Login
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAIL = 'LOGIN_FAIL';

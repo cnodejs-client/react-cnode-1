@@ -5,6 +5,7 @@ import Bar from './components/bar.js';
 import Detail from './container/detail.js';
 import About from './components/about.js';
 import User from './container/user.js';
+import Login from './container/login.js';
 
 const routes = (
   <Route path="/" component={Bar}>
@@ -12,6 +13,7 @@ const routes = (
     <Route path="topic/:id" component={Detail}/>
     <Route path="user/:username" component={User}/>
     <Route path="about" component={About}/>
+    <Route path="login" component={Login}/>
   </Route>
 );
 

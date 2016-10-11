@@ -36,7 +36,7 @@ class Detail extends Component {
             subtitle={'发布于' + createAt}
             avatar={
               <Link to={'/user/' + author.loginname}>
-                <Avatar src={author.avatarUrl} />
+                <Avatar src={author.avatar_url} />
               </Link>
             }
           />
@@ -71,7 +71,7 @@ function select(state) {
   return {
     author: state.topicDetail.author || {
       loginname: '',
-      avatarUrl: ''
+      avatar_url: ''
     },
     createAt: state.topicDetail.create_at || '',
     title: state.topicDetail.title || '',

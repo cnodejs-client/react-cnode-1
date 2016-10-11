@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Editor, EditorState, RichUtils } from 'draft-js';
 import { FlatButton } from 'material-ui';
+import { stateToHTML } from 'draft-js-export-html';
 import './richeditor.less';
 
 // Custom overrides for "code" style.
@@ -111,7 +112,7 @@ class RichEditor extends Component {
           style={{
             color: '#fff'
           }}
-          onClick={() => onHandleClick(contentState)}
+          onClick={() => onHandleClick(stateToHTML(contentState))}
         />
       </div>
     );
