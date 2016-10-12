@@ -38,7 +38,7 @@ class Login extends Component {
         <Card>
           <CardHeader
             title="首页 / 登录"
-            className="loginHeader"
+            className="header"
           />
           <CardText className="loginMain">
             <TextField
