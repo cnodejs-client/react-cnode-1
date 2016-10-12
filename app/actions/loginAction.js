@@ -14,6 +14,12 @@ export function loginFail() {
   };
 }
 
+export function loginOut() {
+  return {
+    type: types.LOGIN_OUT
+  };
+}
+
 export function fetchLogin(url, accessToken, callback) {
   return dispatch => {
     fetch(`https://cnodejs.org/api/v1/${url}`, {

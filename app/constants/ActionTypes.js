@@ -23,3 +23,4 @@ export const RICH_EDITOR_STATE = 'RICH_EDITOR_STATE';
 // Login
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
+export const LOGIN_OUT = 'LOGIN_OUT';

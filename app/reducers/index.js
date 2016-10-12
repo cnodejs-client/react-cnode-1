@@ -81,6 +81,13 @@ export function loginUserData(state = {
       return Object.assign({}, state, action.data);
     case types.LOGIN_FAIL:
       return state;
+    case types.LOGIN_OUT:
+      return Object.assign({}, state, {
+        success: false,
+        loginname: '',
+        avatar_url: '',
+        id: ''
+      });
     default:
       return state;
   }

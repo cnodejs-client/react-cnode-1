@@ -8,20 +8,16 @@ export default class Bar extends Component {
     status: PropTypes.bool.isRequired,
     loginname: PropTypes.string.isRequired,
     avatarUrl: PropTypes.string.isRequired,
-    userid: PropTypes.string.isRequired
+    userid: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired
   }
 
   constructor(props) {
     super(props);
   }
 
-  _handleClick(e) {
-     e.preventDefault();
-     window.console.log('here');
-  }
-
   render() {
-    const { children, status, loginname, avatarUrl } = this.props;
+    const { children, status, loginname, avatarUrl, onClick } = this.props;
     return (
       <div>
         <AppBar
@@ -34,6 +30,7 @@ export default class Bar extends Component {
                 <Link><FlatButton label="新手入门" /></Link>
                 <Link><FlatButton label="API" /></Link>
                 <Link><FlatButton label="关于" /></Link>
+                {status ? <FlatButton label="登出" onClick={() => onClick()}/> : ''}
                 {status ? '' : <Link to="/login"><FlatButton label="登录" /></Link>}
               </div>
               <div>

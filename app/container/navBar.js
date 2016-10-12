@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Bar from '../components/bar.js';
+import { loginOut } from '../actions/loginAction.js';
 
 class NavBar extends Component {
   static propTypes = {
@@ -8,7 +9,8 @@ class NavBar extends Component {
     status: PropTypes.bool.isRequired,
     loginname: PropTypes.string.isRequired,
     avatarUrl: PropTypes.string.isRequired,
-    userid: PropTypes.string.isRequired
+    userid: PropTypes.string.isRequired,
+    dispatch: PropTypes.func.isRequired
   }
 
   constructor(props) {
@@ -16,7 +18,7 @@ class NavBar extends Component {
   }
 
   render() {
-    const { children, status, loginname, avatarUrl, userid } = this.props;
+    const { children, status, loginname, avatarUrl, userid, dispatch } = this.props;
     return (
       <Bar
         children={children}
@@ -24,6 +26,7 @@ class NavBar extends Component {
         loginname={loginname}
         avatarUrl={avatarUrl}
         userid={userid}
+        onClick={() => dispatch(loginOut())}
       />
     );
   }
