@@ -8,14 +8,13 @@ export function loginSuccess(data) {
   };
 }
 
-export function loginFail(err) {
+export function loginFail() {
   return {
     type: types.LOGIN_FAIL,
-    data: err
   };
 }
 
-export function fetchLogin(url, accessToken) {
+export function fetchLogin(url, accessToken, callback) {
   return dispatch => {
     fetch(`https://cnodejs.org/api/v1/${url}`, {
       method: 'POST',
@@ -27,7 +26,16 @@ export function fetchLogin(url, accessToken) {
       }
     })
     .then(res => res.json())
-    .then(data => dispatch(loginSuccess(data)))
-    .catch(err => dispatch(loginFail(err)));
+    .then(data => {
+      if (data.success) {
+        dispatch(loginSuccess(data));
+        callback();
+      }
+      dispatch(loginFail());
+    })
+    .catch(err => {
+      dispatch(loginFail());
+      window.console.log(err);
+    });
   };
 }

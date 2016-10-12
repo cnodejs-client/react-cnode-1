@@ -69,3 +69,19 @@ export function userDetail(state = {}, action) {
       return state;
   }
 }
+
+export function loginUserData(state = {
+  success: false,
+  loginname: '',
+  avatar_url: '',
+  id: ''
+}, action) {
+  switch (action.type) {
+    case types.LOGIN_SUCCESS:
+      return Object.assign({}, state, action.data);
+    case types.LOGIN_FAIL:
+      return state;
+    default:
+      return state;
+  }
+}

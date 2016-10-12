@@ -1,11 +1,13 @@
 import React, { Component, PropTypes } from 'react';
+import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { TextField, Card, CardHeader, CardText, FlatButton } from 'material-ui';
 import { fetchLogin } from '../actions/loginAction.js';
 
 class Login extends Component {
   static propTypes = {
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
+    router: PropTypes.object.isRequired
   }
 
   constructor(props) {
@@ -15,10 +17,12 @@ class Login extends Component {
     };
   }
 
+  skipNext = () => this.props.router.replace('/');
+
   _handleClick() {
     const { dispatch } = this.props;
     const accessToken = this.state.textValue;
-    dispatch(fetchLogin('accesstoken ', accessToken));
+    dispatch(fetchLogin('accesstoken ', accessToken, this.skipNext));
   }
 
   _handleOnChange(e) {
@@ -61,4 +65,4 @@ class Login extends Component {
   }
 }
 
-export default connect()(Login);
+export default connect()(withRouter(Login));
