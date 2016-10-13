@@ -14,7 +14,7 @@ export function makeCommentFail() {
   };
 }
 
-export function fetchCommnet(query, comment) {
+export function fetchCommnet(query, comment, callback) {
   return dispatch => {
     fetch(`https://cnodejs.org/api/v1/topic/${query}/replies`, {
       method: 'POST',
@@ -27,8 +27,12 @@ export function fetchCommnet(query, comment) {
       }
     })
     .then(res => res.json())
-    .then(() => dispatch(makeCommentSuccess(comment)))
+    .then(() => {
+      callback({success: true});
+      dispatch(makeCommentSuccess(comment));
+    })
     .catch(err => {
+      callback({status: 'fail'});
       dispatch(makeCommentFail());
       window.console.log(err);
     });

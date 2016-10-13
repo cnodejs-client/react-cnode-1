@@ -13,7 +13,7 @@ export function postFail() {
   };
 }
 
-export function fetchPost(post) {
+export function fetchPost(post, callback) {
   return dispatch => {
     fetch(`https://cnodejs.org/api/v1/topics`, {
       method: 'POST',
@@ -26,9 +26,13 @@ export function fetchPost(post) {
       }
     })
     .then(res => res.json())
-    .then(data => dispatch(postSuccess(data)))
+    .then(data => {
+      dispatch(postSuccess(data));
+      callback({status: true});
+    })
     .catch(err => {
       dispatch(postFail());
+      callback({status: false});
       window.console.log(err);
     });
   };

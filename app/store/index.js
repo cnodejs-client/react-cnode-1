@@ -1,13 +1,13 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { routerReducer } from 'react-router-redux';
-// import createLogger from 'redux-logger';
+import createLogger from 'redux-logger';
 import { topics, topicDetail, userDetail, loginUserData } from '../reducers/index.js';
 
 const middleware = [ thunk ];
-// const loggerMiddleware = createLogger();
+const loggerMiddleware = createLogger();
 
-// middleware.push(loggerMiddleware);
+middleware.push(loggerMiddleware);
 
 const store = createStore(
   combineReducers({

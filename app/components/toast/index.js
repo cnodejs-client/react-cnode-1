@@ -6,23 +6,27 @@ export default class Toast extends Component {
       title: PropTypes.string.isRequired,
       content: PropTypes.string.isRequired,
       status: PropTypes.bool.isRequired,
-      time: PropTypes.number.isRequired
+      time: PropTypes.number.isRequired,
+      show: PropTypes.bool.isRequired
   }
 
   static defaultProps = {
     title: 'toast',
     content: '',
     status: true,
-    time: 500000
+    time: 2000,
+    show: false
   }
 
   state = {
-    show: true
+    show: this.props.show
   }
 
   componentDidMount() {
-    const { time } = this.props;
-    setTimeout(() => this.setState({show: !this.state.show}), time);
+    const { time, show } = this.props;
+    if (show) {
+      setTimeout(() => this.setState({show: false}), time);
+    }
   }
 
   render() {

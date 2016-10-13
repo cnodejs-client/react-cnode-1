@@ -3,18 +3,33 @@ import { connect } from 'react-redux';
 import { Card, CardHeader, CardText, SelectField, MenuItem, TextField } from 'material-ui';
 import RichEditor from '../components/richeditor/index.js';
 import { fetchPost } from '../actions/postAction.js';
+import Toast from '../components/toast/index.js';
 
 class Post extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired
   }
 
-  constructor() {
-    super();
-    this.state = {
-      title: '',
-      tab: 'default'
-    };
+  state = {
+    title: '',
+    tab: 'default',
+    status: true,
+    show: false,
+    content: ''
+  }
+
+  makeToast = (v) => {
+    if (v.status) {
+      this.setState({
+        show: true,
+        content: '发布成功'
+      });
+    }
+    this.setState({
+      show: true,
+      stauts: false,
+      content: '发布失败'
+    });
   }
 
   _onhandleClick(content) {
@@ -24,7 +39,7 @@ class Post extends Component {
       tab: this.state.tab,
       content: content
     };
-    dispatch(fetchPost(post));
+    dispatch(fetchPost(post, this.makeToast));
   }
 
   _handleTextChange(e) {
@@ -65,6 +80,12 @@ class Post extends Component {
           />
         </CardText>
       </Card>
+      <Toast
+        title="信息提示！"
+        content={this.state.content}
+        status={this.state.status}
+        show={this.state.show}
+      />
       </div>
     );
   }

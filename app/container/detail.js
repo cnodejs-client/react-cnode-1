@@ -19,8 +19,11 @@ class Detail extends Component {
     loginStatus: PropTypes.bool.isRequired,
   }
 
-  constructor(props) {
-    super(props);
+  state = {
+    status: false,
+    title: '提示消息',
+    content: '',
+    show: false
   }
 
   componentDidMount() {
@@ -28,12 +31,26 @@ class Detail extends Component {
     dispatch(fetchDetail('topic', params.id));
   }
 
+  makeTips = (status) => {
+    if (!status.success) {
+      this.setState({
+        status: false,
+        content: '提交失败',
+        show: true
+      });
+    }
+    this.setState({
+      content: '提交成功',
+      show: true
+    });
+  }
+
   _onHandleClick = (state) => {
     const { dispatch, params } = this.props;
     const comment = {
       content: state
     };
-    dispatch(fetchCommnet(params.id, comment));
+    dispatch(fetchCommnet(params.id, comment, this.makeTips));
   }
 
   render() {
@@ -78,6 +95,8 @@ class Detail extends Component {
         <Toast
           title={"hello"}
           content={"哈哈哈哈哈"}
+          status={this.state.status}
+          show={this.state.show}
         />
       </div>
     );

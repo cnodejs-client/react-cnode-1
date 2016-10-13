@@ -106,7 +106,7 @@ class RichEditor extends Component {
           />
         </div>
         <FlatButton
-          label="回复"
+          label="提交"
           backgroundColor="rgba(0, 188, 212, 1)"
           hoverColor="rgba(0, 188, 212, 0.5)"
           style={{
