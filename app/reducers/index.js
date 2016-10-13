@@ -24,7 +24,7 @@ export function topics(state = {
       return Object.assign({}, state, {
         isFetching: false,
         isExpire: false,
-        numbers: action.numbers,
+        numbers: action.numbers + 1,
         btn: {
           show: 'hidden',
           text: '点击加载'
@@ -48,12 +48,31 @@ export function topics(state = {
 }
 
 
-export function topicDetail(state = {}, action) {
+export function topicDetail(state = {
+  author: {
+    loginname: '',
+    avatar_url: ''
+  },
+  create_at: '',
+  title: '',
+  content: '',
+  replies: []
+}, action) {
   switch (action.type) {
     case types.DETAIL_REQUEST_POST:
       return Object.assign({}, state);
     case types.DETAIL_RECEIVE_POST:
       return Object.assign({}, state, action.detail);
+    case types.COMMENT_SUCCESS:
+      return Object.assign({}, state, {
+        replies: [
+          ...state.replies,
+          {
+            author: state.author,
+            ...action.content
+          }
+      ]
+      });
     default:
       return state;
   }

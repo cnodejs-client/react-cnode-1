@@ -7,6 +7,7 @@ import About from './components/about.js';
 import User from './container/user.js';
 import Login from './container/login.js';
 import Post from './container/post.js';
+import Message from './container/message.js';
 
 const routes = (
   <Route path="/" component={NavBar}>
@@ -16,6 +17,7 @@ const routes = (
     <Route path="about" component={About}/>
     <Route path="login" component={Login}/>
     <Route path="post" component={Post}/>
+    <Route path="message" component={Message}/>
   </Route>
 );
 

@@ -6,6 +6,9 @@
     width: 1000px;
     height: auto;
     margin: 20px auto 20px;
+    a {
+      color: #00bcd4;
+    }
     .header {
       background-color: #f4f4f4;
     }
@@ -24,6 +27,7 @@
 
 .menu {
   margin-top: 5px;
+  margin-right: 20px;
   > div {
     float: left;
   }
@@ -43,21 +47,16 @@
 .detail {
   .card {
     margin-bottom: 20px;
-    // box-shadow: none !important;
   }
   .markdown-text {
     img {
-      width: 100% !important;
-    }
-    a {
-      color: #00bcd4;
+      max-width: 100% !important;
     }
   }
 }
 
 .user {
   .card {
-    // box-shadow: none !important;
     position: relative;
     margin-bottom: 20px;
   }
@@ -86,5 +85,14 @@
     input {
       width: 100% !important;
     }
+  }
+}
+
+.about {
+  p {
+    line-height: 2em;
+  }
+  .title {
+    margin-top: 10px;
   }
 }

@@ -27,9 +27,9 @@ export default class Bar extends Component {
             <div className="menu">
               <div>
                 <Link to="/"><FlatButton label="首页" /></Link>
-                <Link to="/post"><FlatButton label="发布话题" /></Link>
-                <Link><FlatButton label="API" /></Link>
-                <Link to="/about"><FlatButton label="关于" /></Link>
+                {status ? '' : <Link to="/about"><FlatButton label="关于" /></Link>}
+                {status ? <Link to="/message"><FlatButton label="未读消息" /></Link> : ''}
+                {status ? <Link to="/post"><FlatButton label="发布话题" /></Link> : ''}
                 {status ? <FlatButton label="登出" onClick={() => onClick()}/> : ''}
                 {status ? '' : <Link to="/login"><FlatButton label="登录" /></Link>}
               </div>

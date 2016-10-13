@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { Card, CardHeader, CardTitle, CardText, List, ListItem, Avatar, Divider } from 'material-ui';
 import { fetchDetail } from '../actions/index.js';
-import { getRichEditorState } from '../actions/richeditorAction.js';
+// import { getRichEditorState } from '../actions/richeditorAction.js';
 import RichEditor from '../components/richeditor/index.js';
+import { fetchCommnet } from '../actions/commentAction.js';
 
 class Detail extends Component {
   static propTypes = {
@@ -14,7 +15,8 @@ class Detail extends Component {
     createAt: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
-    replies: PropTypes.array.isRequired
+    replies: PropTypes.array.isRequired,
+    loginStatus: PropTypes.bool.isRequired,
   }
 
   constructor(props) {
@@ -26,8 +28,16 @@ class Detail extends Component {
     dispatch(fetchDetail('topic', params.id));
   }
 
+  _onHandleClick = (state) => {
+    const { dispatch, params } = this.props;
+    const comment = {
+      content: state
+    };
+    dispatch(fetchCommnet(params.id, comment));
+  }
+
   render() {
-    const { author, createAt, title, content, replies, dispatch } = this.props;
+    const { author, createAt, title, content, replies, loginStatus } = this.props;
     return(
       <div className="detail">
         <Card className="card">
@@ -58,9 +68,12 @@ class Detail extends Component {
           }
         </Card>
         <Card className="card richeditor">
-          <RichEditor
-            onHandleClick={(state) => dispatch(getRichEditorState(state))}
-          />
+          {
+            loginStatus ?
+            <RichEditor
+              onHandleClick={this._onHandleClick}
+            /> : ''
+          }
         </Card>
       </div>
     );
@@ -69,14 +82,12 @@ class Detail extends Component {
 
 function select(state) {
   return {
-    author: state.topicDetail.author || {
-      loginname: '',
-      avatar_url: ''
-    },
-    createAt: state.topicDetail.create_at || '',
-    title: state.topicDetail.title || '',
-    content: state.topicDetail.content || '',
-    replies: state.topicDetail.replies || []
+    author: state.topicDetail.author,
+    createAt: state.topicDetail.create_at,
+    title: state.topicDetail.title,
+    content: state.topicDetail.content,
+    replies: state.topicDetail.replies,
+    loginStatus: state.loginUserData.success
   };
 }
 

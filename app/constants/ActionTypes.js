@@ -29,3 +29,8 @@ export const LOGIN_OUT = 'LOGIN_OUT';
 // post
 export const POST_SUCCESS = 'POST_SUCCESS';
 export const POST_FAIL = 'POST_FAIL';
+
+
+// comment
+export const COMMENT_SUCCESS = 'COMMENT_SUCCESS';
+export const COMMENT_FAIL = 'COMMENT_FAIL';

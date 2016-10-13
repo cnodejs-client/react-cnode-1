@@ -45,7 +45,9 @@ export function fetchLogin(url, accessToken, callback) {
       if (data.success) {
         setToken(accessToken);
         dispatch(loginSuccess(data));
-        callback();
+        if (callback) {
+          callback();
+        }
       }
       dispatch(loginFail());
     })
