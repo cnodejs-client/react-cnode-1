@@ -22,7 +22,7 @@ class Login extends Component {
   _handleClick() {
     const { dispatch } = this.props;
     const accessToken = this.state.textValue;
-    dispatch(fetchLogin('accesstoken ', accessToken, this.skipNext));
+    dispatch(fetchLogin('accesstoken', accessToken, this.skipNext));
   }
 
   _handleOnChange(e) {

@@ -19,9 +19,7 @@ export function fetchPost(post) {
       method: 'POST',
       body: JSON.stringify({
         accesstoken: '90821d3b-f348-4e74-8fb3-10d765114d20',
-        title: post.title,
-        tab: post.tab,
-        content: post.content
+        ...post
       }),
       headers: {
         'Content-Type': 'application/json'

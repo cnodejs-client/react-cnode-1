@@ -1,5 +1,6 @@
 import * as types from '../constants/ActionTypes.js';
 import 'whatwg-fetch';
+import { setToken, deleteToken } from '../util/auth.js';
 
 export function loginSuccess(data) {
   return {
@@ -20,6 +21,14 @@ export function loginOut() {
   };
 }
 
+export function loginOutMiddware(callback) {
+  return dispatch => {
+    dispatch(loginOut());
+    deleteToken();
+    callback();
+  };
+}
+
 export function fetchLogin(url, accessToken, callback) {
   return dispatch => {
     fetch(`https://cnodejs.org/api/v1/${url}`, {
@@ -34,6 +43,7 @@ export function fetchLogin(url, accessToken, callback) {
     .then(res => res.json())
     .then(data => {
       if (data.success) {
+        setToken(accessToken);
         dispatch(loginSuccess(data));
         callback();
       }
