@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { Card, CardHeader, CardTitle, CardText, List, ListItem, Avatar, Divider } from 'material-ui';
+import { Card, CardHeader, CardTitle, CardText, List, ListItem, Avatar, Divider, FlatButton } from 'material-ui';
 import { fetchDetail } from '../actions/index.js';
 import RichEditor from '../components/richeditor/index.js';
 import { fetchCommnet } from '../actions/commentAction.js';
@@ -67,6 +67,20 @@ class Detail extends Component {
               </Link>
             }
           />
+          <span className="collect">
+          <FlatButton
+            label="收藏"
+            onClick={() => this._handleClick()}
+            backgroundColor="rgba(0, 188, 212, 1)"
+            hoverColor="rgba(0, 188, 212, 0.5)"
+            style={{
+              width: '50px',
+              color: '#fff',
+              display: 'block',
+              marginTop: '20px'
+            }}
+          />
+          </span>
           <CardTitle title={title}/>
           <CardText dangerouslySetInnerHTML={{__html: content}}/>
           <CardHeader title="评论"/>
