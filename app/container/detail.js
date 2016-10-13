@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { Card, CardHeader, CardTitle, CardText, List, ListItem, Avatar, Divider } from 'material-ui';
 import { fetchDetail } from '../actions/index.js';
-// import { getRichEditorState } from '../actions/richeditorAction.js';
 import RichEditor from '../components/richeditor/index.js';
 import { fetchCommnet } from '../actions/commentAction.js';
+import Toast from '../components/toast/index.js';
 
 class Detail extends Component {
   static propTypes = {
@@ -75,6 +75,10 @@ class Detail extends Component {
             /> : ''
           }
         </Card>
+        <Toast
+          title={"hello"}
+          content={"哈哈哈哈哈"}
+        />
       </div>
     );
   }

@@ -9,3 +9,10 @@ export function getToken() {
 export function deleteToken() {
   delete localStorage.token;
 }
+
+
+export function authenticate(nextState, replace) {
+  if(!getToken()) {
+    replace('/');
+  }
+}

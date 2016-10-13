@@ -17,7 +17,9 @@ class Home extends Component {
 
   componentDidMount() {
     const { dispatch, page } = this.props;
-    dispatch(fetchList('topics', page));
+    if (page === 1) {
+      dispatch(fetchList('topics', page));
+    }
   }
 
   render() {

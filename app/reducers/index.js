@@ -32,7 +32,7 @@ export function topics(state = {
         page: [action.page]
       });
     case types.LISTS_RECEIVE_MORE_POST:
-      state.page[action.numbers] = action.page;
+      state.page[action.numbers - 1] = action.page;
       return Object.assign({}, state, {
         isFetching: false,
         isExpire: false,

@@ -8,6 +8,7 @@ import User from './container/user.js';
 import Login from './container/login.js';
 import Post from './container/post.js';
 import Message from './container/message.js';
+import { authenticate } from './util/auth.js';
 
 const routes = (
   <Route path="/" component={NavBar}>
@@ -16,7 +17,7 @@ const routes = (
     <Route path="user/:username" component={User}/>
     <Route path="about" component={About}/>
     <Route path="login" component={Login}/>
-    <Route path="post" component={Post}/>
+    <Route path="post" component={Post} onEnter={authenticate}/>
     <Route path="message" component={Message}/>
   </Route>
 );
