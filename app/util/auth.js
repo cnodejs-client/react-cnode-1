@@ -1,5 +1,7 @@
-export function setToken(accessToken) {
+export function setToken(accessToken, data) {
   localStorage.token = accessToken;
+  localStorage.username = data.loginname;
+  localStorage.userid = data.id;
 }
 
 export function getToken() {
@@ -8,8 +10,13 @@ export function getToken() {
 
 export function deleteToken() {
   delete localStorage.token;
+  delete localStorage.username;
+  delete localStorage.userid;
 }
 
+export function getUserName() {
+  return localStorage.username;
+}
 
 export function authenticate(nextState, replace) {
   if(!getToken()) {

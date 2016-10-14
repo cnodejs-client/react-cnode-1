@@ -5,6 +5,8 @@ import { Card, CardHeader, CardTitle, CardText, List, ListItem, Avatar, Divider,
 import { fetchDetail } from '../actions/index.js';
 import RichEditor from '../components/richeditor/index.js';
 import { fetchCommnet } from '../actions/commentAction.js';
+import { fetchCollect, fetchUncollect, topicCollectStatus } from '../actions/collectAction.js';
+import { getUserName } from '../util/auth.js';
 import Toast from '../components/toast/index.js';
 
 class Detail extends Component {
@@ -17,6 +19,7 @@ class Detail extends Component {
     content: PropTypes.string.isRequired,
     replies: PropTypes.array.isRequired,
     loginStatus: PropTypes.bool.isRequired,
+    isCollect: PropTypes.bool.isRequired
   }
 
   state = {
@@ -29,6 +32,9 @@ class Detail extends Component {
   componentDidMount() {
     const { dispatch, params } = this.props;
     dispatch(fetchDetail('topic', params.id));
+    if (getUserName()) {
+      dispatch(topicCollectStatus(getUserName(), params.id));
+    }
   }
 
   makeTips = (status) => {
@@ -53,8 +59,18 @@ class Detail extends Component {
     dispatch(fetchCommnet(params.id, comment, this.makeTips));
   }
 
+  _collectHandleClick = () => {
+    const { dispatch, params } = this.props;
+    dispatch(fetchCollect(params.id));
+  }
+
+  _uncollectHandleClick = () => {
+    const { dispatch, params } = this.props;
+    dispatch(fetchUncollect(params.id));
+  }
+
   render() {
-    const { author, createAt, title, content, replies, loginStatus } = this.props;
+    const { author, createAt, title, content, replies, loginStatus, isCollect } = this.props;
     return(
       <div className="detail">
         <Card className="card">
@@ -67,19 +83,30 @@ class Detail extends Component {
               </Link>
             }
           />
-          <span className="collect">
-          <FlatButton
-            label="收藏"
-            onClick={() => this._handleClick()}
-            backgroundColor="rgba(0, 188, 212, 1)"
-            hoverColor="rgba(0, 188, 212, 0.5)"
-            style={{
-              width: '50px',
-              color: '#fff',
-              display: 'block',
-              marginTop: '20px'
-            }}
-          />
+        <span className="collect" style={{display: loginStatus ? 'block' : 'none'}}>
+          {!isCollect ?
+            <FlatButton
+              label="收藏"
+              onClick={this._collectHandleClick}
+              backgroundColor="rgba(0, 188, 212, 1)"
+              hoverColor="rgba(0, 188, 212, 0.5)"
+              style={{
+                color: '#fff',
+                display: 'block',
+                marginTop: '20px'
+              }}
+            /> :
+            <FlatButton
+              label="取消收藏"
+              onClick={this._uncollectHandleClick}
+              backgroundColor="rgba(0, 188, 212, 1)"
+              hoverColor="rgba(0, 188, 212, 0.5)"
+              style={{
+                color: '#fff',
+                display: 'block',
+                marginTop: '20px'
+              }}
+            />}
           </span>
           <CardTitle title={title}/>
           <CardText dangerouslySetInnerHTML={{__html: content}}/>
@@ -124,7 +151,8 @@ function select(state) {
     title: state.topicDetail.title,
     content: state.topicDetail.content,
     replies: state.topicDetail.replies,
-    loginStatus: state.loginUserData.success
+    loginStatus: state.loginUserData.success,
+    isCollect: state.topicDetail.is_collect
   };
 }
 

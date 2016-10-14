@@ -25,7 +25,7 @@ export default class Bar extends Component {
           iconElementLeft={<IconButton />}
           iconElementRight={
             <div className="menu">
-              <div>
+              <div className="list">
                 <Link to="/"><FlatButton label="首页" /></Link>
                 {status ? '' : <Link to="/about"><FlatButton label="关于" /></Link>}
                 {status ? <Link to="/message"><FlatButton label="未读消息" /></Link> : ''}

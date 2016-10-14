@@ -34,6 +34,7 @@ class NavBar extends Component {
     const { children, status, loginname, avatarUrl, userid, dispatch } = this.props;
     return (
       <Bar
+        className="navbar"
         children={children}
         status={status}
         loginname={loginname}

@@ -56,7 +56,8 @@ export function topicDetail(state = {
   create_at: '',
   title: '',
   content: '',
-  replies: []
+  replies: [],
+  is_collect: false
 }, action) {
   switch (action.type) {
     case types.DETAIL_REQUEST_POST:
@@ -71,19 +72,37 @@ export function topicDetail(state = {
             author: state.author,
             ...action.content
           }
-      ]
+        ]
+      });
+    case types.COLLECT_SUCCESS:
+      return Object.assign({}, state, {
+        is_collect: true
+      });
+    case types.UNCOLLECT_SUCCESS:
+      return Object.assign({}, state, {
+        is_collect: false
+      });
+    case types.DEFAULTSTATUS:
+      return Object.assign({}, state, {
+        is_collect: true
       });
     default:
       return state;
   }
 }
 
-export function userDetail(state = {}, action) {
+export function userDetail(state = {
+  user_collect: []
+}, action) {
   switch (action.type) {
     case types.USER_REQUEST_POST:
       return Object.assign({}, state);
     case types.USER_RECEIVE_POST:
       return Object.assign({}, state, action.data);
+    case types.USER_COLLECTTOPICS_SUCCESS:
+      return Object.assign({}, state, {
+        user_collect: action.data
+      });
     default:
       return state;
   }

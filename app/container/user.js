@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import moment from 'moment';
 import { Card, CardHeader, CardText, Divider} from 'material-ui';
 import { fetchUser } from '../actions/index.js';
+import { fetchUserCollectTopics } from '../actions/collectAction.js';
 
 //初始语言汉语
 moment.locale('zh-cn');
@@ -18,7 +19,8 @@ class User extends Component {
     avatarUrl: PropTypes.string.isRequired,
     createAt: PropTypes.string.isRequired,
     recentTopics: PropTypes.array.isRequired,
-    recentReplies: PropTypes.array.isRequired
+    recentReplies: PropTypes.array.isRequired,
+    userCollect: PropTypes.array.isRequired
   }
 
   constructor(props) {
@@ -28,10 +30,11 @@ class User extends Component {
   componentDidMount() {
     const { dispatch, params } = this.props;
     dispatch(fetchUser('user', params.username));
+    dispatch(fetchUserCollectTopics(params.username));
   }
 
   render() {
-    const { loginName, score, avatarUrl, createAt, recentTopics, recentReplies } = this.props;
+    const { loginName, score, avatarUrl, createAt, recentTopics, recentReplies, userCollect } = this.props;
     return (
       <div className="user">
         <Card className="card">
@@ -79,6 +82,22 @@ class User extends Component {
             )
           }
         </Card>
+        <Card className="card">
+          <CardHeader
+            title="收藏的话题"
+            className="recent_info"
+          />
+          {
+            userCollect.map((val, i) =>
+              <Link to={'/topic/' + val.id} key={i}>
+                <CardText>
+                  <div>{val.title}</div>
+                </CardText>
+                <Divider />
+              </Link>
+            )
+          }
+        </Card>
       </div>
     );
   }
@@ -91,7 +110,8 @@ function select(state) {
     avatarUrl: state.userDetail.avatar_url || '',
     createAt: state.userDetail.create_at || '',
     recentTopics: state.userDetail.recent_topics || [],
-    recentReplies: state.userDetail.recent_replies || []
+    recentReplies: state.userDetail.recent_replies || [],
+    userCollect: state.userDetail.user_collect
   };
 }
 

@@ -1,5 +1,6 @@
 import * as types from '../constants/ActionTypes.js';
 import 'whatwg-fetch';
+import { getToken } from '../util/auth.js';
 
 export function makeCommentSuccess(content) {
   return {
@@ -19,7 +20,7 @@ export function fetchCommnet(query, comment, callback) {
     fetch(`https://cnodejs.org/api/v1/topic/${query}/replies`, {
       method: 'POST',
       body: JSON.stringify({
-        accesstoken: '90821d3b-f348-4e74-8fb3-10d765114d20',
+        accesstoken: getToken(),
         ...comment
       }),
       headers: {

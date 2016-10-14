@@ -1,4 +1,5 @@
 import * as types from '../constants/ActionTypes.js';
+import { getToken } from '../util/auth.js';
 
 export function postSuccess(json) {
   return {
@@ -18,7 +19,7 @@ export function fetchPost(post, callback) {
     fetch(`https://cnodejs.org/api/v1/topics`, {
       method: 'POST',
       body: JSON.stringify({
-        accesstoken: '90821d3b-f348-4e74-8fb3-10d765114d20',
+        accesstoken: getToken(),
         ...post
       }),
       headers: {

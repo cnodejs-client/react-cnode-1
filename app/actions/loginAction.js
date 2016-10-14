@@ -43,13 +43,12 @@ export function fetchLogin(url, accessToken, callback) {
     .then(res => res.json())
     .then(data => {
       if (data.success) {
-        setToken(accessToken);
+        setToken(accessToken, data);
         dispatch(loginSuccess(data));
         if (callback) {
           callback();
         }
       }
-      dispatch(loginFail());
     })
     .catch(err => {
       dispatch(loginFail());
