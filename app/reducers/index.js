@@ -131,12 +131,22 @@ export function loginUserData(state = {
   }
 }
 
+
 export function messages(state = {
-  count: 0
+  count: 0,
+  has_read: [],
+  not_read: []
 }, action) {
   switch (action.type) {
     case types.MESSAGE_COUNT_SUCCESS:
-      return Object.assign({}, state, action.data);
+      return Object.assign({}, state, {
+        count: action.data
+      });
+    case types.MESSAGE_SUCCESS:
+      return Object.assign({}, state, {
+        has_read: action.messages.has_read_messages,
+        not_read: action.messages.hasnot_read_messages
+      });
     default:
       return state;
   }

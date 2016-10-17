@@ -17,3 +17,20 @@ export function getMessageCount() {
     .catch(err => window.console.log(err));
   };
 }
+
+export function getMessagesSuccess(data) {
+  return {
+    type: types.MESSAGE_SUCCESS,
+    messages: data.data
+  };
+}
+
+export function getMessages() {
+  const token = getToken();
+  return dispatch => {
+    fetch(`https://cnodejs.org/api/v1/messages?accesstoken=${token}`)
+    .then(res => res.json())
+    .then(data => dispatch(getMessagesSuccess(data)))
+    .catch(err => window.console.log(err));
+  };
+}

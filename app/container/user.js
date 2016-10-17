@@ -23,10 +23,6 @@ class User extends Component {
     userCollect: PropTypes.array.isRequired
   }
 
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     const { dispatch, params } = this.props;
     dispatch(fetchUser('user', params.username));

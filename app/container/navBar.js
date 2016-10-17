@@ -15,7 +15,8 @@ class NavBar extends Component {
     status: PropTypes.bool.isRequired,
     loginname: PropTypes.string.isRequired,
     avatarUrl: PropTypes.string.isRequired,
-    userid: PropTypes.string.isRequired
+    userid: PropTypes.string.isRequired,
+    count: PropTypes.number.isRequired
   }
 
   constructor(props) {
@@ -33,7 +34,7 @@ class NavBar extends Component {
   skipNext = () => this.props.router.replace('/');
 
   render() {
-    const { children, status, loginname, avatarUrl, userid, dispatch } = this.props;
+    const { children, status, loginname, avatarUrl, userid, dispatch, count } = this.props;
     return (
       <Bar
         className="navbar"
@@ -42,6 +43,7 @@ class NavBar extends Component {
         loginname={loginname}
         avatarUrl={avatarUrl}
         userid={userid}
+        count={count}
         onClick={() => dispatch(loginOutMiddware(this.skipNext))}
       />
     );
@@ -53,7 +55,8 @@ function select(state) {
     status: state.loginUserData.success,
     loginname: state.loginUserData.loginname,
     avatarUrl: state.loginUserData.avatar_url,
-    userid: state.loginUserData.id
+    userid: state.loginUserData.id,
+    count: state.messages.count
   };
 }
 
