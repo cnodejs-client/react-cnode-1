@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { AppBar, FlatButton, IconButton, Avatar } from 'material-ui';
+import { AppBar, FlatButton, IconButton, Avatar, Badge } from 'material-ui';
 import { Link } from 'react-router';
 
 export default class Bar extends Component {
@@ -28,7 +28,7 @@ export default class Bar extends Component {
               <div className="list">
                 <Link to="/"><FlatButton label="首页" /></Link>
                 {status ? '' : <Link to="/about"><FlatButton label="关于" /></Link>}
-                {status ? <Link to="/message"><FlatButton label="未读消息" /></Link> : ''}
+                {status ? <Link to="/message"><Badge className="badge" badgeContent={4} secondary><FlatButton label="未读消息" /></Badge></Link> : ''}
                 {status ? <Link to="/post"><FlatButton label="发布话题" /></Link> : ''}
                 {status ? <FlatButton label="登出" onClick={() => onClick()}/> : ''}
                 {status ? '' : <Link to="/login"><FlatButton label="登录" /></Link>}

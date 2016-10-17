@@ -14,7 +14,7 @@ class Post extends Component {
     title: '',
     tab: 'default',
     status: true,
-    show: false,
+    show: true,
     content: ''
   }
 

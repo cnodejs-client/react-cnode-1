@@ -130,3 +130,14 @@ export function loginUserData(state = {
       return state;
   }
 }
+
+export function messages(state = {
+  count: 0
+}, action) {
+  switch (action.type) {
+    case types.MESSAGE_COUNT_SUCCESS:
+      return Object.assign({}, state, action.data);
+    default:
+      return state;
+  }
+}
