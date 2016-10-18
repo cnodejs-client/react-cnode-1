@@ -4,11 +4,12 @@
   height: 60px;
   padding: 15px 20px;
   position: fixed;
-  top: 20px;
+  top: 0px;
   right: 20px;
   z-index: 1101;
   border-radius: 4px;
   box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+
   h3 {
     color: #fff;
     height: 30px;
@@ -20,8 +21,12 @@
 
 .toast_success {
   background-color: rgba(34, 34, 34, 0.8);
+  transition: all 0.3s ease-in-out;
+  top: 20px;
 }
 
 .toast_fail {
   background-color: rgba(230, 90, 90, 0.8);
+  transition: all 0.3s ease-in-out;
+  top: 20px;
 }

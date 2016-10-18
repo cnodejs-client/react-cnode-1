@@ -13,23 +13,14 @@ class Post extends Component {
   state = {
     title: '',
     tab: 'default',
-    status: true,
-    show: true,
     content: ''
   }
 
   makeToast = (v) => {
     if (v.status) {
-      this.setState({
-        show: true,
-        content: '发布成功'
-      });
+      this.refs.toast.toastSuccess('发布成功');
     }
-    this.setState({
-      show: true,
-      stauts: false,
-      content: '发布失败'
-    });
+    this.refs.toast.toastError('发布失败');
   }
 
   _onhandleClick(content) {
@@ -50,6 +41,10 @@ class Post extends Component {
   }
 
   _handleSelectChange = (event, index, tab) => this.setState({tab})
+
+  toastClick = () => {
+    this.refs.toast.toastError('发布成功');
+  }
 
   render() {
     return (
@@ -80,12 +75,7 @@ class Post extends Component {
           />
         </CardText>
       </Card>
-      <Toast
-        title="信息提示！"
-        content={this.state.content}
-        status={this.state.status}
-        show={this.state.show}
-      />
+      <Toast ref="toast" />
       </div>
     );
   }
